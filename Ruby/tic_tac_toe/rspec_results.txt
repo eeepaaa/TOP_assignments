@@ -1,0 +1,49 @@
+
+Board
+  is able to access cells' value
+    returns cells' values
+    updates a cell's value
+    updates many cells' value
+    resets cells' values
+
+Players
+  are able to mark cells
+    on the top row
+    on the middle row
+    on the bottom row
+
+Players
+  are able to mark cells through #mark_on
+    on the top row
+    on the middle row
+    on the bottom row
+
+Players
+  returns false if win patters are not present
+    rows-wise
+    columns-wise
+    diagonally
+
+Players
+  returns true if win patters are present rows-wise
+    on the top row
+    on the middle row
+    on the bottom row
+
+Players
+  returns true if win patters are present columns-wise
+    on the first column
+    on the second column
+    on the third column
+
+Players
+  returns true if win patters are present diagonally
+    from left to right
+    from right to left
+
+Players
+  recognizes winner
+
+Finished in 0.00952 seconds (files took 0.13784 seconds to load)
+22 examples, 0 failures
+

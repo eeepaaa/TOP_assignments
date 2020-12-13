@@ -1,0 +1,24 @@
+
+BubbleSort
+  sorts only if needed
+  sorts two numbers
+  sorts many numbers
+  sorts negative numbers
+
+CaesarCipher
+  ciphers only when shift value is present
+  ciphers only letters
+  ciphers only letter
+  ciphers one word
+  ciphers two words
+  ciphers retains capital letters
+  ciphers many words
+  ciphers based on negative shift values
+
+SubStrings
+  matches one word
+  matches multiple words
+
+Finished in 0.00798 seconds (files took 0.13309 seconds to load)
+14 examples, 0 failures
+

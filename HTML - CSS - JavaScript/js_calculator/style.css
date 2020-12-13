@@ -1,0 +1,150 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delimiters {
+  border: .5px solid black;
+  border-radius: 3px;
+}
+
+.keys_squares {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+  cursor: pointer;
+}
+
+.greenish_squares {
+  background-color: aquamarine;
+}
+
+.redish_squares {
+  background-color: crimson;
+}
+
+#calculator_shape {
+  width: 175px;
+  height: 225px;
+  padding: 10px;
+  display: grid;
+  grid-template-areas: 
+    "s"
+    "k";
+  background-color: gray;
+  box-shadow: 0 0 7px 1px black;
+}
+
+#screen {
+  width: 175px;
+  height: 55px;
+  display: flex;
+  justify-content: flex-end;
+  overflow: hidden;
+  align-items: center;
+  grid-area: "s";
+  background-color: white;
+}
+
+#input {
+  padding: 0 5px 0 0;
+  font-size: 30px;
+  line-height: 0;
+  white-space: nowrap;
+}
+
+#keys {
+  width: 175px;
+  height: 165px;
+  margin-top: 5px;
+  display: grid;
+  grid-template-areas: 
+    "l l a d"
+    "e g n m"
+    "f i s b"
+    "o t h u"
+    "z z c q";
+    grid-gap: 4px;
+  grid-area: "k";
+}
+
+#one {
+  grid-area: o;
+}
+
+#two {
+  grid-area: t;
+}
+
+#three {
+  grid-area: h;
+}
+
+#four {
+  grid-area: f;
+}
+
+#five {
+  grid-area: i;
+}
+
+#six {
+  grid-area: s;
+}
+
+#seven {
+  grid-area: e;
+}
+
+#eight {
+  grid-area: g;
+}
+
+#nine {
+  grid-area: n;
+}
+
+#zero {
+
+  grid-area: z;
+}
+
+#multiply {
+  grid-area: m;
+}
+
+#divide {
+  grid-area: d;
+}
+
+#sum {
+  grid-area: u;
+}
+
+#substract {
+  grid-area: b;
+}
+
+#equal {
+  grid-area: q;
+}
+
+#decimal {
+  grid-area: c;
+}
+
+#clear {
+  grid-area: l;
+}
+
+#backspace {
+  grid-area: a;
+}
