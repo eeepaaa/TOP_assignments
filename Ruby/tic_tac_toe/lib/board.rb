@@ -43,7 +43,7 @@ class Board
       puts "1 - 3   #{cell_one} | #{cell_two} | #{cell_three}  "
       puts '       ___|___|___'
       puts '          |   |   '
-      puts "4 - 6   #{@cell_four} | #{@cell_five} | #{@ell_six}  "
+      puts "4 - 6   #{@cell_four} | #{@cell_five} | #{@cell_six}  "
       puts '       ___|___|___'
       puts '          |   |   '
       puts "7 - 9   #{cell_seven} | #{cell_eight} | #{cell_nine}  "

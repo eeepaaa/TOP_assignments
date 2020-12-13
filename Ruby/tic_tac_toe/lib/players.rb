@@ -9,6 +9,16 @@ class Players
 
   attr_reader :name, :mark
 
+  def self.computer_mark
+    cell = rand(9)
+    cell += 1 if cell.zero?
+    if Board.cells_marked.include?(cell)
+      computer_mark
+    else
+      cell
+    end
+  end
+
   def initialize(name: 'Joe', mark: 'X')
     @name = name
     @mark = mark
@@ -31,15 +41,5 @@ class Players
     return true if winner_rows?
     return true if winner_columns?
     return true if winner_diagonal?
-  end
-
-  def computer_mark
-    cell = rand(9)
-    cell += 1 if cell.zero?
-    if Game.cells_marked.include?(cell)
-      computer_mark
-    else
-      cell
-    end
   end
 end

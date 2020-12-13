@@ -24,7 +24,7 @@ module Enabled
 
   def mark_cells(cell)
     mark_cells_top(cell) if cell <= 3
-    mark_cells_middle(cell) if cell <= 7
+    mark_cells_middle(cell) if cell <= 6
     mark_cells_bottom(cell) if cell <= 9
     Board.update_marked_cells
     Board.cells_marked << cell
