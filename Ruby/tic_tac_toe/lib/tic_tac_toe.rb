@@ -19,7 +19,7 @@ while true
     break
   when /b/i
     puts "\nAlright! We're good to go." \
-          "\nYou'll play as 'X' and your friend as 'O'."
+         "\nYou'll play as 'X' and your friend as 'O'."
     player_one = Players.new
     player_two = Players.new(name: 'your friend', mark: 'O')
     sleep(3)
