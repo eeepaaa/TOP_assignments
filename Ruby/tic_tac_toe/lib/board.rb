@@ -25,19 +25,6 @@ class Board
                        cell_seven, cell_eight, cell_nine]
     end
 
-    def reset
-      @cell_one = ' '
-      @cell_two = ' '
-      @cell_three = ' '
-      @cell_four = ' '
-      @cell_five = ' '
-      @cell_six = ' '
-      @cell_seven = ' '
-      @cell_eight = ' '
-      @cell_nine = ' '
-      @cells_marked = []
-    end
-
     def update_board
       puts "\n          |   |   "
       puts "1 - 3   #{cell_one} | #{cell_two} | #{cell_three}  "
