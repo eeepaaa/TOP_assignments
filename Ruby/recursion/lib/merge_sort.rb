@@ -2,22 +2,29 @@
 
 # MergeShort method
 class MergeSort
-  def merge_sort(arr, sorted_arr = [])
-    return sorted_arr << arr[0] if arr.length < 2
-   
-    if arr.length == 2
-      if arr[0] > arr[1]
-        temp = arr[0]
-        arr[0] = arr[1]
-        arr[1] = temp
-        return sorted_arr << arr[0] << arr[1]
-      else 
-        return sorted_arr << arr[0] << arr[1]
-      end
-    end
+  def merge_sort(arr)
+    return arr if arr.length <= 1
 
-    right_half = merge_sort(arr.slice!(0, arr.length / 2), sorted_arr)
-    left_half = merge_sort(arr, sorted_arr)
+    left = merge_sort(arr.slice!(0, arr.length / 2))
+    right = merge_sort(arr)
+
+    merge(left, right)
+  end
+
+  def merge(left, right, sorted_arr = [])
+    (left.length + right.length).times do
+      sorted_arr << if left.empty?
+                      right.shift
+                    elsif right.empty?
+                      left.shift
+                    else
+                      case left <=> right
+                      when -1 then left.shift
+                      when 1 then right.shift
+                      else left.shift
+                      end
+                    end
+    end
 
     sorted_arr
   end

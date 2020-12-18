@@ -8,16 +8,16 @@ describe MergeSort do
       expect(subject.merge_sort([1])).to eql([1])
     end
 
-    it 'splits a two-element arr in halfs' do
+    it 'sorts a two-element arr' do
       expect(subject.merge_sort([2, 1])).to eql([1, 2])
     end
 
-    it 'splits a three-element arr in halfs' do
-      expect(subject.merge_sort([3, 2, 1])).to eql([[3], [[2], [1]]])
+    it 'sorts a three-element arr' do
+      expect(subject.merge_sort([2, 3, 1])).to eql([1, 2, 3])
     end
 
-    it 'splits a four-element arr in halfs' do
-      expect(subject.merge_sort([4, 3, 2, 1])).to eql([1, 2, 3, 4])
+    it 'sorts a four-element arr' do
+      expect(subject.merge_sort(([1, 2, 3, 4].shuffle))).to eql([1, 2, 3, 4])
     end
   end
 end
