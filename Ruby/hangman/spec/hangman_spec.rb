@@ -1,6 +1,5 @@
 # frozen_string_literal: false
 
-require './lib/readable'
 require './lib/game'
 
 describe Readable do
@@ -24,15 +23,15 @@ describe Game do
   end
 
   it 'logs tried letters.' do
-    subject.guessed += 'a'
-    subject.guessed += 'b'
-    expect(subject.guessed).to eql 'ab'
-    subject.guessed = ''
+    subject.tried += 'a'
+    subject.tried += 'b'
+    expect(subject.tried).to eql 'ab'
+    subject.tried = ''
   end
 
-  it 'replaces missing letters guessed correctly.' do
-    subject.guessed += 'u'
-    subject.guessed += 'a'
+  it 'replaces missing letters tried correctly.' do
+    subject.tried += 'u'
+    subject.tried += 'a'
     expect(subject.update_word('e')).to eql 'b e a u _ y'
   end
 end
