@@ -8,15 +8,15 @@ class Game
   include Readable
   attr_accessor :word, :guesses, :tried
 
-  def self.json_create(_obj)
-    new
+  def self.json_create(obj)
+    new(obj['data']['word'], obj['data']['guesses'], obj['data']['tried'])
   end
 
-  def initialize
-    @word = extract_word
-    @guesses = 0
+  def initialize(word = extract_word, guesses = 0, tried = '')
+    @word = word
+    @guesses = guesses
     @hidden_word = @word[1..-2].split('').map { '_' }.join(' ')
-    @tried = ''
+    @tried = tried
   end
 
   def update_word(guess)

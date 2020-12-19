@@ -16,4 +16,14 @@ module Readable
       e.length >= 5 && e.length <= 12
     end
   end
+
+  def save_game(file_name, string)
+    Dir.mkdir('saves') unless Dir.exist?('saves')
+
+    file = "./saves/#{Dir.children('./saves').length}_#{file_name}"
+
+    File.open(file, 'a') do |e|
+      e.puts string
+    end
+  end
 end
