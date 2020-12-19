@@ -35,12 +35,10 @@ class Game
   end
 
   def to_s
-    if @tried.empty?
-      "The word is: #{@word}. The number of guesses is: #{@guesses}, " \
-      'and no letters have been tried yet.'
+    if @guesses < 5
+      "Your guess count is: #{@guesses}. You have #{5 - guesses} hints remaining."
     else
-      "The word is: #{@word}. The number of guesses is: #{@guesses}, " \
-      "and the letters tried are: #{@tried}."
+      "You're out of guesses. Sorry."
     end
   end
 
