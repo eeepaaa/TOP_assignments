@@ -6,7 +6,7 @@ require './lib/readable'
 # Game's output methods
 class Game
   include Readable
-  attr_accessor :word, :guesses, :tried
+  attr_accessor :word, :guesses, :tried, :hidden_word
 
   def self.json_create(obj)
     new(obj['data']['word'], obj['data']['guesses'], obj['data']['tried'])
@@ -20,8 +20,8 @@ class Game
   end
 
   def update_word(guess)
-    @guesses += 1
-    @tried += guess
+    @guesses += 1 unless @word[1..-2].include?(guess)
+    @tried += guess unless @tried.include?(guess)
     @hidden_word = @hidden_word.split(/\s/)
 
     @word[1..-2].split('').each_index do |i|
@@ -30,8 +30,12 @@ class Game
       end
     end
 
-    @hidden_word = @hidden_word.join(' ')
     show_word
+  end
+
+  def show_word
+    @hidden_word = @hidden_word.join(' ') if @hidden_word.instance_of?(Array)
+    "#{@word[0]} #{@hidden_word} #{@word[-1]}"
   end
 
   def to_s
@@ -51,11 +55,5 @@ class Game
         tried: @tried
       }
     }.to_json
-  end
-
-  private
-
-  def show_word
-    "#{@word[0]} #{@hidden_word} #{@word[-1]}"
   end
 end
