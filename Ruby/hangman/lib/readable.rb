@@ -22,7 +22,7 @@ module Readable
   def save_game(file_name, string)
     Dir.mkdir('saves') unless Dir.exist?('saves')
 
-    file = "./saves/#{Dir.children('./saves').length}_#{file_name}"
+    file = "./saves/#{Dir.children('./saves').length + 1}_#{file_name}"
 
     File.open(file, 'a') do |e|
       e.print string
@@ -30,8 +30,6 @@ module Readable
   end
 
   def restore_game(file_num)
-    return Readable::MSG unless Dir.exist?('saves')
-
     File.read "./saves/#{find_saved_game(file_num)}"
   end
 
@@ -40,11 +38,15 @@ module Readable
     saved_games.each do |e|
       return e if e.match?(regexp)
     end
-
-    Readable::MSG
   end
 
   def saved_games
-    Dir.children('./saves')
+    return Dir.children('./saves').sort if Dir.children('./saves').length.positive?
+
+    'There are no saved games.'
+  end
+
+  def delete_game(file_num)
+    File.delete "./saves/#{find_saved_game(file_num)}"
   end
 end

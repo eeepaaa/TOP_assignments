@@ -10,7 +10,11 @@ This is a small repository containing all the solutions to the projects from The
 
 #### ***Ruby:***  
 - ( **x** ) BubbleSort.  
+- ( **x** ) MergeSort.
 - ( **x** ) CaesarCipher.  
 - ( **x** ) Subtrings.  
 - ( **x** ) TicTacToe.  
-- ( **-** ) StockPicker.  
+- ( **x** ) EventManager.
+- ( **x** ) Hangman.
+- ( **-** ) StockPicker.
+- ( **-** ) Mastermind.

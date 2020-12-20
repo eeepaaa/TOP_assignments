@@ -4,44 +4,76 @@ require './lib/game'
 
 system 'clear'
 
-puts "HANGMAN! v1.0\n\n"
-puts "\nMAIN MENU:\na. Start new game.\nb. Load saved game."
-print "\nWhat would you like to do? Enter either 'a' or 'b': "
+puts "HANGMAN! v1.1\n\n"
+puts "\nMAIN MENU:\na. Start new game.\nb. Load saved game.\nc. Delete saved game."
+print "\nWhat would you like to do? Enter either 'a', 'b' or 'c': "
 answer = gets.chomp
 
-until answer[0] =~ /a/i || answer[0] =~ /b/i
-  print "You have enter either 'a' or 'b': "
+until answer[0] =~ /a/i || answer[0] =~ /b/i || answer[0] =~ /c/i
+  print "You have to enter either 'a', 'b' or 'c': "
   answer = gets.chomp
 end
 
 case answer
-when /a/i
-  player = Game.new
+when /a/i then player = Game.new
 when /b/i
-  puts "\nThis is the list of saved games:"
+  puts "\nType 'new' to a start a new game. Else, this is the list of saved games:"
   puts Readable.saved_games
   print "\nEnter the number corresponding to the game you'd like to load: "
-  player = gets.chomp.to_i
+  player = gets.chomp
 
   loop do
-    if (0..Readable.saved_games.length - 1).cover?(player)
-      player = JSON.parse(Readable.restore_game(player), create_additions: true)
+    break unless Readable.saved_games.instance_of?(Array)
+
+    if player =~ /new/i
+      player = Game.new
+      break
+    elsif (1..Readable.saved_games.length).cover?(player.to_i)
+      player = JSON.parse(Readable.restore_game(player.to_i), create_additions: true)
       break
     else
       puts Readable::MSG
       print 'Try again with another number: '
-      player = gets.chomp.to_i
+      player = gets.chomp
     end
   end
+
   player.update_word(player.tried)
+
+when /c/i
+  loop do
+    break if player =~ /new/i
+    break unless Readable.saved_games.instance_of?(Array)
+
+    system 'clear'
+
+    puts "HANGMAN! v1.1\n\n"
+    puts "\nMAIN MENU:\na. Start new game.\nb. Load saved game.\nc. Delete saved game."
+
+    puts "\nType 'new' to a start a new game. Else, this is the list of saved games:"
+    puts Readable.saved_games
+    print "\nEnter the number corresponding to the game you'd like to delete: "
+    player = gets.chomp
+
+    if (1..Readable.saved_games.length).cover?(player.to_i)
+      Readable.delete_game(player.to_i)
+      puts 'Game deleted!'
+    else
+      puts Readable::MSG
+      print 'Try again with another number: '
+      player = gets.chomp
+    end
+  end
+
+  player = Game.new if player =~ /new/i
 end
 
-puts "\nAlright! Game will start momentarily."
+puts "\nStarting new game."
 sleep(1)
 
 while player.guesses < 5 && player.hidden_word.include?('_')
   system 'clear'
-  puts "HANGMAN! v1.0\n\n"
+  puts "HANGMAN! v1.1\n\n"
   puts "Enter 'save' to save your game or 'exit' to exit the program at any time."
   puts player
   puts "#{"\n" * 1}#{"\s" * 5}#{player.show_word}#{"\s" * 5} You've tried: #{player.tried} #{"\n" * 2}"
@@ -57,22 +89,30 @@ while player.guesses < 5 && player.hidden_word.include?('_')
     raise 'Bye! Comeback soon.'
   when /\d/ then next
   else
-    player.update_word(answer[0])
+    begin
+      player.update_word(answer[0])
+    rescue TypeError
+      next
+    end
     unless player.hidden_word.include?('_')
-      puts "\nGREAT! You were correct." \
+      puts 'GREAT! You were correct.' \
            " The word was '#{player.show_word.split(/\s/).join}'."
       break
     end
   end
-
-  sleep(0.5)
 end
 
+system 'clear'
+puts "HANGMAN! v1.1\n\n"
+
 if player.hidden_word.include?('_')
-  system 'clear'
-  puts "HANGMAN! v1.0\n\n"
-  puts "#{player} The word was '#{player.word}.'"
+  puts "#{player}\nThe word was '#{player.word}.'"
+else
+  puts "Enter 'save' to save your game or 'exit' to exit the program at any time."
+  puts player
+  puts "#{"\n" * 1}#{"\s" * 5}#{player.show_word}#{"\s" * 5} You've tried: #{player.tried} #{"\n" * 2}"
+  puts "GREAT! You were correct. The word was '#{player.show_word.split(/\s/).join}'."
 end
 
 print "If you'd like to play again enter 'a': "
-system 'ruby ./lib/hangman.rb' if gets.chomp =~ /a/i
+system 'ruby ./lib/hangman.rb' if gets.chomp[0] =~ /a/i
