@@ -42,7 +42,6 @@ when /b/i
 
 when /c/i
   loop do
-    break if player =~ /new/i
     break unless Readable.saved_games.instance_of?(Array)
 
     system 'clear'
@@ -54,6 +53,7 @@ when /c/i
     puts Readable.saved_games
     print "\nEnter the number corresponding to the game you'd like to delete: "
     player = gets.chomp
+    break if player =~ /new/i
 
     if (1..Readable.saved_games.length).cover?(player.to_i)
       Readable.delete_game(player.to_i)
